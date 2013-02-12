@@ -1,11 +1,11 @@
 <html>
 <head>
- 	<title>PDO Tutorial</title>
+ 	<title>Class Tutorial</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
 <script type='text/javascript'>
-function delete_user(id){
+function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
@@ -31,14 +31,14 @@ function delete_user(id){
 		}
 	}
 
-	$num =$con->query("select count(*) from PERSON");
+	$num =$con->query("select count(*) from CLASS");
 	
 	//select all data
-	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, ROLE_ID from PERSON";
+	$sql = "select ID, ROOM, GRADE_LEVEL_ID, TERM_ID, MAIN_TEACHER from CLASS";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='person-insert.php'>Create New Record</a>";
+	echo "<a href='class-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$class-var1="imagetable";
 	$class-tag = "class=" . $class-var1;
@@ -48,18 +48,16 @@ function delete_user(id){
 		<table $class-tag>
 			<tr>
 				<th>ID</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
-				<th>Area Code</th>
-				<th>Phone Number</th>
-				<th>Role ID</th>
+				<th>Room</th>
+				<th>Grade Level ID</th>
+				<th>Term ID</th>
+				<th>Main Teacher</th>
 				<th>Action</th>
 			</tr>
 		";
  
 		//retrieve table contents, index=>value pairs converted to columnName=>data
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+		while ($row = $query->fetch(PDO::FETCH_ASSOC)){
 
 	 		//convert $row['FNAME'] to $FNAME
 			extract($row);
@@ -68,16 +66,14 @@ function delete_user(id){
 			echo "
 			<tr>
 				<td>{$ID}</td>
-				<td>{$FNAME}</td>
-				<td>{$LNAME}</td>
-				<td>{$EMAIL}</td>
-				<td>{$PHONE_AC}</td>
-				<td>{$PHONE}</td>
-				<td>{$ROLE_ID}</td>
+				<td>{$ROOM}</td>
+				<td>{$GRADE_LEVEL_ID}</td>
+				<td>{$TERM_ID}</td>
+				<td>{$MAIN_TEACHER}</td>
 				<td>
-					<a href='person-update.php?record-id={$ID}'>Edit</a>
+					<a href='class-update.php?record-id={$ID}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>
 			</tr>
 			";

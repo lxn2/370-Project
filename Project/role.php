@@ -1,11 +1,11 @@
 <html>
 <head>
- 	<title>PDO Tutorial</title>
+ 	<title>Role Tutorial</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
 <script type='text/javascript'>
-function delete_role(id){
+function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
@@ -49,6 +49,7 @@ function delete_role(id){
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+                <th>Action</th>
 			</tr>
 		";
  
@@ -66,7 +67,7 @@ function delete_role(id){
 				<td>
 					<a href='role-update.php?record-id={$ID}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_role( {$ID} );'>Delete</a>
 				</td>
 			</tr>
 			";

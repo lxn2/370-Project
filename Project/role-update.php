@@ -14,8 +14,8 @@
 		try{
 			$sql = "update ROLE set NAME = ? where ID = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array(	$_POST['ID-update'],
-							$_POST['name-update']));
+			$query->execute(array(	$_POST['name-update'],
+							$_POST['record-id']));
 			echo "Record was updated.";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
