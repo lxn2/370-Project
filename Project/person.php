@@ -5,7 +5,7 @@
 </head>
 <body>
 <script type='text/javascript'>
-function delete_user(id){
+function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
@@ -77,7 +77,7 @@ function delete_user(id){
 				<td>
 					<a href='person-update.php?record-id={$ID}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>
 			</tr>
 			";
