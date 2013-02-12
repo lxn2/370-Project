@@ -66,7 +66,7 @@
 					<!--we will set the action to edit-->
 					<input type='hidden' name='form-action' value='update' />
 					<input type='submit' value='Edit' />
-					<a href='person.php'>Back to index</a>
+					<a href='term.php'>Back to index</a>
 				</td>
 			</tr>
 		</table>

@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>Person Table</title>
+ 	<title>Term Table</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
@@ -34,11 +34,11 @@ function delete_record(id){
 	$num =$con->query("select count(*) from TERM");
 	
 	//select all data
-	$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from PERSON";
+	$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from TERM";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='person-insert.php'>Create New Record</a>";
+	echo "<a href='term-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$classTag1 = "imagetable";
 	$classTag2 = "class=" . $classTag1;
