@@ -1,0 +1,36 @@
+create table TERM (
+	ID			integer identity(1,1),
+	ACAD_YEAR			varchar(40) not null,
+	START_DATE			date not null,
+	END_DATE			date not null,
+
+	constraint TERM_ID_PK primary key(ID)
+)
+go
+
+create table LOG (
+	STUDENT_ID			integer,
+	CLASS_ID			integer,
+	LOG_DATE			datetime,
+	OLD_STATUS			varchar(40) not null,
+	NEW_STATUS			varchar(40) not null,
+	ID_OF_UPDATER		integer not null,
+)
+go
+
+alter table LOG add 
+	constraint LOG_STUDENT_ID_FK foreign key(STUDENT_ID) references STUDENT.ID,
+	constraint LOG_CLASS_ID_FK foreign key(CLASS_ID) references CLASS.ID,
+	constraint LOG_ID_OF_UPDATER foreign key(ID_OF_UPDATER) references PERSON.ID,
+	constraint LOG_STUDENT_PK primary key(STUDENT_ID, CLASS_ID, LOG_DATE)
+
+ 
+ create table HOLIDAY (
+	ID			integer identity(1,1),
+	NAME			varchar(40) not null,
+	H_DATE			date not null,
+	END_DATE			date not null,
+
+	constraint HOLIDAY_ID_PK primary key(ID)
+)
+go
