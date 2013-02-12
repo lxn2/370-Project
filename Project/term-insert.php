@@ -15,7 +15,7 @@
 			$sql = "insert into PERSON (ACAD_YEAR,START_DATE,END_DATE)
 			 	values (:ACAD_YEAR,:START_DATE,:END_DATE)";  
 			$query = $con->prepare($sql);  
-			$query->execute(array(	':FNAME'=>$_POST['firstName-new'], 
+			$query->execute(array(	 
 							':ACAD_YEAR'=>$_POST['acadYear-new'], 
 							':START_DATE'=>$_POST['startDate-new'], 
 							':END_DATE'=>$_POST['endDate-new']));
