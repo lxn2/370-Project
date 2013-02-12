@@ -1,0 +1,84 @@
+<html>
+<head>
+ 	<title>PDO Initial Read and Delete function</title>
+	<link rel="stylesheet" type="text/css" href="db.css" />
+<script>
+var timeout		= 500;
+var closetimer	= 0;
+var ddmenuitem	= 0;
+
+// open hidden layer
+function mopen(id)
+{	
+	// cancel close timer
+	mcancelclosetime();
+
+	// close old layer
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+	// get new layer and show it
+	ddmenuitem = document.getElementById(id);
+	ddmenuitem.style.visibility = 'visible';
+
+}
+// close showed layer
+function mclose()
+{
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+}
+
+// go close timer
+function mclosetime()
+{
+	closetimer = window.setTimeout(mclose, timeout);
+}
+
+// cancel close timer
+function mcancelclosetime()
+{
+	if(closetimer)
+	{
+		window.clearTimeout(closetimer);
+		closetimer = null;
+	}
+}
+
+// close layer when click-out
+document.onclick = mclose; 
+</script>
+
+ </head>
+ 
+<body>
+<ul id="sddm">
+    <li><a href="#" 
+        onmouseover="mopen('m1')" 
+        onmouseout="mclosetime()">Table CRUD</a>
+        <div id="m1" 
+            onmouseover="mcancelclosetime()" 
+            onmouseout="mclosetime()">
+        <a href="person.php">Person Table</a>
+        <a href="#">Students</a>
+        <a href="#">Classes</a>
+	<a href="#">Roles</a>
+	<a href="#">Attendance Types</a>
+        </div>
+    </li>
+    <li><a href="#" 
+        onmouseover="mopen('m2')" 
+        onmouseout="mclosetime()">Attendance</a>
+        <div id="m2" 
+            onmouseover="mcancelclosetime()" 
+            onmouseout="mclosetime()">
+        <a href="#">New Attendance</a>
+        <a href="#">Update Existing</a>
+        </div>
+    </li>
+    <li><a href="#">Reports</a></li>
+    <li><a href="#">View Logs</a></li>
+    <li><a href="#">View Alerts</a></li>
+</ul>
+<div style="clear:both"></div>
+
+ </body>
+</html>
