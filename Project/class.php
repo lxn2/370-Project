@@ -5,11 +5,11 @@
 </head>
 <body>
 <script type='text/javascript'>
-function delete_role(id){
+function delete_user(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'role.php?form-action=delete&record-id=' + id;
+		window.location = 'class.php?form-action=delete&record-id=' + id;
 	} 
 }
 </script>
@@ -22,7 +22,7 @@ function delete_role(id){
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from ROLE where ID = ?";
+			$sql = "delete from CLASS where ID = ?";
 			$query = $con->prepare($sql);
 			$query->execute(array( $_GET['record-id']));
 			echo "<div>Record was deleted.</div>";
@@ -31,14 +31,14 @@ function delete_role(id){
 		}
 	}
 
-	$num =$con->query("select count(*) from ROLE");
+	$num =$con->query("select count(*) from PERSON");
 	
 	//select all data
-	$sql = "select ID, NAME from ROLE";
+	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, ROLE_ID from PERSON";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='role-insert.php'>Create New Record</a>";
+	echo "<a href='person-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$class-var1="imagetable";
 	$class-tag = "class=" . $class-var1;
@@ -48,7 +48,13 @@ function delete_role(id){
 		<table $class-tag>
 			<tr>
 				<th>ID</th>
-				<th>Name</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Area Code</th>
+				<th>Phone Number</th>
+				<th>Role ID</th>
+				<th>Action</th>
 			</tr>
 		";
  
@@ -62,9 +68,14 @@ function delete_role(id){
 			echo "
 			<tr>
 				<td>{$ID}</td>
-				<td>{$NAME}</td>
+				<td>{$FNAME}</td>
+				<td>{$LNAME}</td>
+				<td>{$EMAIL}</td>
+				<td>{$PHONE_AC}</td>
+				<td>{$PHONE}</td>
+				<td>{$ROLE_ID}</td>
 				<td>
-					<a href='role-update.php?record-id={$ID}'>Edit</a>
+					<a href='person-update.php?record-id={$ID}'>Edit</a>
 					 / 
 					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
 				</td>
