@@ -30,11 +30,13 @@
  				<td>Name</td>
  				<td><input type='text' name='name-new' /></td>
   			</tr>
-            <td colspan="2" style="text-align: center;">
- 				<input type='hidden' name='form-action' value='create' />
-		  		<input type='submit' value='Save' />
-  				<a href='index.php'>Back to index</a>
- 			</td>
+			<tr>
+            			<td colspan="2" style="text-align: center;">
+ 					<input type='hidden' name='form-action' value='create' />
+		  			<input type='submit' value='Save' />
+  					<a href='index.php'>Back to index</a>
+ 				</td>
+			</tr>
 		</table>
 	</form>
 </body>

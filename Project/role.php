@@ -40,8 +40,8 @@ function delete_role(id){
 
 	echo "<a href='role-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
-	$class-var1="imagetable";
-	$class-tag = "class=" . $class-var1;
+	$classTag1 = "imagetable";
+	$classTag2 = "class=" . $classTag1;
 	//if records exist, build table
 	if($num>0){
  		echo "
@@ -53,7 +53,7 @@ function delete_role(id){
 		";
  
 		//retrieve table contents, index=>value pairs converted to columnName=>data
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+		while ($row = $query->fetch(PDO::FETCH_ASSOC)){
 
 	 		//convert $row['FNAME'] to $FNAME
 			extract($row);
