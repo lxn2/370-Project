@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>PDO Create Record - http://codeofaninja.com/</title>
+ 	<title>Person Table - Insert Record</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>	

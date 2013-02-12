@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>PDO Tutorial</title>
+ 	<title>Person Table</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>

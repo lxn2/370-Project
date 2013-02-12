@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>PDO Initial Read and Delete function</title>
+	<title>Person Table - Update Record</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
