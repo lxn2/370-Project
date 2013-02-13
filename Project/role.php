@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>Role Tutorial</title>
+ 	<title>Role Table</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
@@ -67,7 +67,7 @@ function delete_record(id){
 				<td>
 					<a href='role-update.php?record-id={$ID}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_role( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>
 			</tr>
 			";

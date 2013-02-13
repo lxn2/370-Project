@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>Role Table - Insert Record</title>
+ 	<title>Grade Table - Insert Record</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>	
@@ -12,10 +12,10 @@
 
 	if($action=='create'){
  		try{  
-			$sql = "insert into ROLE (NAME)
-			 	values (:NAME)";
+			$sql = "insert into GRADE (NAME)
+			 	values (:NAME)";  
 			$query = $con->prepare($sql);  
-			$query->execute(array(	':NAME'=>$_POST['name-new']));
+			$query->execute(array(	':NAME'=>$_POST['name-new'] ));
 			echo "Record was saved.";
 		}catch(PDOException $exception){ //to handle error
  	  		echo "Error: " . $exception->getMessage();}
@@ -30,11 +30,11 @@
  				<td>Name</td>
  				<td><input type='text' name='name-new' /></td>
   			</tr>
-			<tr>
-            			<td colspan="2" style="text-align: center;">
+            <tr>
+  				<td colspan="2" style="text-align: center;">
  					<input type='hidden' name='form-action' value='create' />
-		  			<input type='submit' value='Save' />
-  					<a href='role.php'>Back to index</a>
+			  		<input type='submit' value='Save' />
+  					<a href='grade.php'>Back to index</a>
  				</td>
 			</tr>
 		</table>

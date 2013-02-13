@@ -1,6 +1,6 @@
 <html>
 <head>
- 	<title>Class Table</title>
+ 	<title>Student Table</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
@@ -9,7 +9,7 @@ function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'class.php?form-action=delete&record-id=' + id;
+		window.location = 'student.php?form-action=delete&record-id=' + id;
 	} 
 }
 </script>
@@ -22,7 +22,7 @@ function delete_record(id){
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from CLASS where ID = ?";
+			$sql = "delete from STUDENT where ID = ?";
 			$query = $con->prepare($sql);
 			$query->execute(array( $_GET['record-id']));
 			echo "<div>Record was deleted.</div>";
@@ -31,27 +31,30 @@ function delete_record(id){
 		}
 	}
 
-	$num =$con->query("select count(*) from CLASS");
+	$num =$con->query("select count(*) from STUDENT");
 	
 	//select all data
-	$sql = "select ID, ROOM, GRADE_LEVEL_ID, TERM_ID, MAIN_TEACHER from CLASS";
+	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, CURRENT_CLASS, CASE_WORKER from STUDENT";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='class-insert.php'>Create New Record</a>";
+	echo "<a href='student-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
-	$class-var1="imagetable";
-	$class-tag = "class=" . $class-var1;
+	$classTag1 = "imagetable";
+	$classTag2 = "class=" . $classTag1;
 	//if records exist, build table
 	if($num>0){
  		echo "
-		<table $class-tag>
+		<table $classTag2>
 			<tr>
 				<th>ID</th>
-				<th>Room</th>
-				<th>Grade Level ID</th>
-				<th>Term ID</th>
-				<th>Main Teacher</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Area Code</th>
+				<th>Phone Number</th>
+				<th>Current Class</th>
+                <th>Case Worker</th>
 				<th>Action</th>
 			</tr>
 		";
@@ -66,12 +69,15 @@ function delete_record(id){
 			echo "
 			<tr>
 				<td>{$ID}</td>
-				<td>{$ROOM}</td>
-				<td>{$GRADE_LEVEL_ID}</td>
-				<td>{$TERM_ID}</td>
-				<td>{$MAIN_TEACHER}</td>
+				<td>{$FNAME}</td>
+				<td>{$LNAME}</td>
+				<td>{$EMAIL}</td>
+				<td>{$PHONE_AC}</td>
+				<td>{$PHONE}</td>
+				<td>{$CURRENT_CLASS}</td>
+                <td>{$CASE_WORKER}</td>
 				<td>
-					<a href='class-update.php?record-id={$ID}'>Edit</a>
+					<a href='student-update.php?record-id={$ID}'>Edit</a>
 					 / 
 					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>

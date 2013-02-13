@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Role Table - Update Record</title>
+	<title>Grade Table - Update Record</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 	if($action == "update"){
 		try{
-			$sql = "update ROLE set NAME = ? where ID = ?";
+			$sql = "update GRADE set NAME = ? where ID = ?";
 			$query = $con->prepare($sql);
 			$query->execute(array(	$_POST['name-update'],
 							$_POST['record-id']));
@@ -24,7 +24,7 @@
 
 	try {
 		//prepare query
-		$sql = "select ID, NAME from ROLE where ID =:ID";
+		$sql = "select ID, NAME from GRADE where ID =:ID";
 		$query = $con->prepare( $sql );
 		$query->bindParam ( ':ID', $_REQUEST['record-id'],PDO::PARAM_INT );  
 		$query->execute();
@@ -54,7 +54,7 @@
 					<!--we will set the action to edit-->
 					<input type='hidden' name='form-action' value='update' />
 					<input type='submit' value='Edit' />
-					<a href='role.php'>Back to index</a>
+					<a href='grade.php'>Back to index</a>
 				</td>
 			</tr>
 		</table>
