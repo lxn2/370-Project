@@ -12,7 +12,7 @@
 
 	if($action=='create'){
  		try{  
-			$sql = "insert into PERSON (FNAME,LNAME,EMAIL,PHONE_AC,PHONE,PASS_WORD,ROLE_ID)
+			$sql = "insert into FP.PERSON (FNAME,LNAME,EMAIL,PHONE_AC,PHONE,PASS_WORD,ROLE_ID)
 			 	values (:FNAME,:LNAME,:EMAIL,:PHONE_AC,:PHONE,:PASS_WORD,:ROLE_ID)";  
 			$query = $con->prepare($sql);  
 			$query->execute(array(	':FNAME'=>$_POST['firstName-new'], 

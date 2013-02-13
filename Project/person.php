@@ -22,7 +22,7 @@ function delete_record(id){
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from PERSON where ID = ?";
+			$sql = "delete from FP.PERSON where ID = ?";
 			$query = $con->prepare($sql);
 			$query->execute(array( $_GET['record-id']));
 			echo "<div>Record was deleted.</div>";
@@ -31,10 +31,10 @@ function delete_record(id){
 		}
 	}
 
-	$num =$con->query("select count(*) from PERSON");
+	$num =$con->query("select count(*) from FP.PERSON");
 	
 	//select all data
-	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, ROLE_ID from PERSON";
+	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, ROLE_ID from FP.PERSON";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
