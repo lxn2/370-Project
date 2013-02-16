@@ -9,7 +9,7 @@ function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'person.php?form-action=delete&record-id=' + id;
+		window.location = 'person.php?form_action=delete&record_id=' + id;
 	} 
 }
 </script>
@@ -17,21 +17,23 @@ function delete_record(id){
 	//include database connection
 	include 'db_connect.php';
 
-	$action = isset($_GET['form-action']) ? $_GET['form-action']: "";
+	$action = isset($_GET['form_action']) ? $_GET['form_action']: "";
 
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
 			$sql = "delete from FP.PERSON where ID = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array( $_GET['record-id']));
+			$query->execute(array( $_GET['record_id']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
 		}
 	}
 
-	$num =$con->query("select count(*) from FP.PERSON");
+	$query =$con->query("select count(*) as NUM_RECORDS from FP.PERSON");
+	$query = $query->fetch(PDO::FETCH_ASSOC);
+	$num = $query['NUM_RECORDS'];
 	
 	//select all data
 	$sql = "select ID, FNAME, LNAME, EMAIL, PHONE_AC, PHONE, ROLE_ID from FP.PERSON";
@@ -75,7 +77,7 @@ function delete_record(id){
 				<td>{$PHONE}</td>
 				<td>{$ROLE_ID}</td>
 				<td>
-					<a href='person-update.php?record-id={$ID}'>Edit</a>
+					<a href='person-update.php?record_id={$ID}'>Edit</a>
 					 / 
 					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>
