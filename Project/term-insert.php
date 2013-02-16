@@ -8,7 +8,7 @@
  	//include database connection
  	include 'db_connect.php';
 	
-	$action = isset($_POST['form-action']) ? $_POST['form-action'] : "";
+	$action = isset($_POST['form_action']) ? $_POST['form_action'] : "";
 
 	if($action=='create'){
  		try{  
@@ -16,9 +16,9 @@
 			 	values (:ACAD_YEAR,:START_DATE,:END_DATE)";  
 			$query = $con->prepare($sql);  
 			$query->execute(array(	 
-							':ACAD_YEAR'=>$_POST['acadYear-new'], 
-							':START_DATE'=>$_POST['startDate-new'], 
-							':END_DATE'=>$_POST['endDate-new']));
+							':ACAD_YEAR'=>$_POST['acadYear_update'], 
+							':START_DATE'=>$_POST['startDate_update'], 
+							':END_DATE'=>$_POST['endDate_update']));
 			echo "Record was saved.";
 		}catch(PDOException $exception){ //to handle error
  	  		echo "Error: " . $exception->getMessage();}
@@ -31,20 +31,20 @@
 		<table class="imagetable">
  			<tr>
  				<td>Academic Year</td>
- 				<td><input type='text' name='acadYear-new' /></td>
+ 				<td><input type='text' name='acadYear_update' /></td>
   			</tr>
  			<tr>
  				<td>Start Date</td>
-		 		<td><input type='text' name='startDate-new' /></td>
+		 		<td><input type='text' name='startDate_update' /></td>
 			</tr>
  			<tr>
  				<td>End Date</td>
-		   		<td><input type='text' name='endDate-new' /></td>
+		   		<td><input type='text' name='endDate_update' /></td>
 			</tr>
 
 			<tr>
   				<td colspan="2" style="text-align: center;">
- 					<input type='hidden' name='form-action' value='create' />
+ 					<input type='hidden' name='form_action' value='create' />
 			  		<input type='submit' value='Save' />
   					<a href='term.php'>Back to index</a>
  				</td>

@@ -8,14 +8,14 @@
  	//include database connection
  	include 'db_connect.php';
 	
-	$action = isset($_POST['form-action']) ? $_POST['form-action'] : "";
+	$action = isset($_POST['form_action']) ? $_POST['form_action'] : "";
 
 	if($action=='create'){
  		try{  
-			$sql = "insert into ROLE (NAME)
+			$sql = "insert into FP.ROLE (NAME)
 			 	values (:NAME)";
 			$query = $con->prepare($sql);  
-			$query->execute(array(	':NAME'=>$_POST['name-new']));
+			$query->execute(array(	':NAME'=>$_POST['name_update']));
 			echo "Record was saved.";
 		}catch(PDOException $exception){ //to handle error
  	  		echo "Error: " . $exception->getMessage();}
@@ -28,11 +28,11 @@
 		<table class="imagetable">
  			<tr>
  				<td>Name</td>
- 				<td><input type='text' name='name-new' /></td>
+ 				<td><input type='text' name='name_update' /></td>
   			</tr>
 			<tr>
             			<td colspan="2" style="text-align: center;">
- 					<input type='hidden' name='form-action' value='create' />
+ 					<input type='hidden' name='form_action' value='create' />
 		  			<input type='submit' value='Save' />
   					<a href='role.php'>Back to index</a>
  				</td>

@@ -9,7 +9,7 @@ function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'class.php?form-action=delete&record-id=' + id;
+		window.location = 'class.php?form_action=delete&record_id=' + id;
 	} 
 }
 </script>
@@ -17,35 +17,37 @@ function delete_record(id){
 	//include database connection
 	include 'db_connect.php';
 
-	$action = isset($_GET['form-action']) ? $_GET['form-action']: "";
+	$action = isset($_GET['form_action']) ? $_GET['form_action']: "";
 
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from CLASS where ID = ?";
+			$sql = "delete from FP.CLASS where ID = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array( $_GET['record-id']));
+			$query->execute(array( $_GET['record_id']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
 		}
 	}
 
-	$num =$con->query("select count(*) from CLASS");
+	$query =$con->query("select count(*) as NUM_RECORDS from FP.CLASS");
+    $query = $query->fetch(PDO::FETCH_ASSOC);
+    $num = $query['NUM_RECORDS']
 	
 	//select all data
-	$sql = "select ID, ROOM, GRADE_LEVEL_ID, TERM_ID, MAIN_TEACHER from CLASS";
+	$sql = "select ID, ROOM, GRADE_LEVEL_ID, TERM_ID, MAIN_TEACHER from FP.CLASS";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
 	echo "<a href='class-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
-	$class-var1="imagetable";
-	$class-tag = "class=" . $class-var1;
+	$classTag1 = "imagetable";
+	$classTag2 = "class=" . $classTag1;
 	//if records exist, build table
 	if($num>0){
  		echo "
-		<table $class-tag>
+		<table $classTag2>
 			<tr>
 				<th>ID</th>
 				<th>Room</th>
@@ -71,7 +73,7 @@ function delete_record(id){
 				<td>{$TERM_ID}</td>
 				<td>{$MAIN_TEACHER}</td>
 				<td>
-					<a href='class-update.php?record-id={$ID}'>Edit</a>
+					<a href='class-update.php?record_id={$ID}'>Edit</a>
 					 / 
 					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>

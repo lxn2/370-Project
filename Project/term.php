@@ -9,7 +9,7 @@ function delete_record(id){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'term.php?form-action=delete&record-id=' + id;
+		window.location = 'term.php?form_action=delete&record_id=' + id;
 	} 
 }
 </script>
@@ -17,24 +17,26 @@ function delete_record(id){
 	//include database connection
 	include 'db_connect.php';
 
-	$action = isset($_GET['form-action']) ? $_GET['form-action']: "";
+	$action = isset($_GET['form_action']) ? $_GET['form_action']: "";
 
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from TERM where ID = ?";
+			$sql = "delete from FP.TERM where ID = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array( $_GET['record-id']));
+			$query->execute(array( $_GET['record_id']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
 		}
 	}
-
-	$num =$con->query("select count(*) from TERM");
+    
+    $query =$con->query("select count(*) as NUM_RECORDS from FP.TERM");
+    $query = $query->fetch(PDO::FETCH_ASSOC);
+    $num = $query['NUM_RECORDS']
 	
 	//select all data
-	$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from TERM";
+	$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from FP.TERM";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
@@ -67,7 +69,7 @@ function delete_record(id){
 				<td>{$START_DATE}</td>
 				<td>{$END_DATE}</td>
 				<td>
-					<a href='term-update.php?record-id={$ID}'>Edit</a>
+					<a href='term-update.php?record_id={$ID}'>Edit</a>
 					 / 
 					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
 				</td>

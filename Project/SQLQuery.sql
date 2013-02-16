@@ -7,7 +7,7 @@ create table FP.PERSON (
 	PHONE			char(8) default(999-9999),
 	PASS_WORD		varchar(20) not null,
 	ROLE_ID		integer not null,
-	constraint FP.PERSON_ID_PK primary key(ID)
+	constraint FP_PERSON_ID_PK primary key(ID)
 )
 go
 
@@ -20,7 +20,7 @@ go
 create table FP.ROLE (
 	ID			integer identity(1,1),
 	NAME			varchar(12) not null,
-	constraint FP.ROLE_ID_PK primary key(ID)
+	constraint FP_ROLE_ID_PK primary key(ID)
 )
 go
 
@@ -36,22 +36,22 @@ create table FP.CLASS (
     GRADE_LEVEL_ID  integer not null,
     TERM_ID         integer null,
     MAIN_TEACHER    integer not null,
-    constraint FP.CLASS_ID_PK primary key(ID)
+    constraint FP_CLASS_ID_PK primary key(ID)
 )
 go
 
 alter table FP.CLASS
-add constraint FP.CLASS_GRADE_LEVEL_ID_FK 
+add constraint FP_CLASS_GRADE_LEVEL_ID_FK 
 foreign key(GRADE_LEVEL_ID) 
 references FP.GRADE(ID)
 
 alter table FP.CLASS
-add constraint FP.CLASS_TERM_ID_FK
+add constraint FP_CLASS_TERM_ID_FK
 foreign key(TERM_ID)
 references FP.TERM(ID)
 
 alter table FP.CLASS
-add constraint FP.CLASS_MAIN_TEACHER_FK
+add constraint FP_CLASS_MAIN_TEACHER_FK
 foreign key(MAIN_TEACHER)
 references FP.PERSON(ID)
 
@@ -70,17 +70,17 @@ create table FP.STUDENT (
 	PHONE			char(8) default(999-9999),
 	CURRENT_CASS	integer null,
 	CASE_WORKER		integer not null,
-    constraint FP.STUDENT_ID_PK primary key(ID)
+    constraint FP_STUDENT_ID_PK primary key(ID)
 )
 go
 
 alter table FP.STUDENT
-add constraint FP.STUDENT_CURRENT_CLASS_FK
+add constraint FP_STUDENT_CURRENT_CLASS_FK
 foreign key(CURRENT_CLASS)
 references FP.CLASS(ID)
 
 alter table FP.STUDENT
-add constraint FP.STUDENT_CASE_WORKER_FK
+add constraint FP_STUDENT_CASE_WORKER_FK
 foreign key(CASE_WORKER)
 references FP.PERSON(ID)
 
@@ -91,9 +91,9 @@ references FP.PERSON(ID)
 
 
 create table FP.GRADE (
-    ID              integer identity)1,1),
+    ID              integer identity(1,1),
     NAME            varchar(12) not null,
-    constraint FP.GRADE_ID_PK primary key(ID)
+    constraint FP_GRADE_ID_PK primary key(ID)
 )
 go
 
