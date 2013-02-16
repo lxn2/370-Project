@@ -20,8 +20,8 @@
 							':EMAIL'=>$_POST['email_update'], 
 							':PHONE_AC'=>$_POST['phoneAC_update'],
 							':PHONE'=>$_POST['phone_update'],
-							':CURRENT_CLASS'=>$_POST['currentClass_update']
-                            ':CASE_WORKER'=>$_POST['caseWorker_update']));
+							':CURRENT_CLASS'=>$_POST['currentClass_update'],
+                            			':CASE_WORKER'=>$_POST['caseWorker_update']));
 			echo "Record was saved.";
 		}catch(PDOException $exception){ //to handle error
  	  		echo "Error: " . $exception->getMessage();}

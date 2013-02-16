@@ -15,7 +15,7 @@
 			$sql = "insert into FP.ROLE (NAME)
 			 	values (:NAME)";
 			$query = $con->prepare($sql);  
-			$query->execute(array(	':NAME'=>$_POST['name_update']));
+			$query->execute(array(	':NAME'=>$_POST['name_new']));
 			echo "Record was saved.";
 		}catch(PDOException $exception){ //to handle error
  	  		echo "Error: " . $exception->getMessage();}
@@ -28,7 +28,7 @@
 		<table class="imagetable">
  			<tr>
  				<td>Name</td>
- 				<td><input type='text' name='name_update' /></td>
+ 				<td><input type='text' name='name_new' /></td>
   			</tr>
 			<tr>
             			<td colspan="2" style="text-align: center;">

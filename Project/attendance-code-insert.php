@@ -39,7 +39,7 @@
   				<td colspan="2" style="text-align: center;">
  					<input type='hidden' name='form_action' value='create' />
 			  		<input type='submit' value='Save' />
-  					<a href='attendance-code-insert.php'>Back to index</a>
+  					<a href='attendance-code.php'>Back to index</a>
  				</td>
 			</tr>
 		</table>

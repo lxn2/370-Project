@@ -12,12 +12,12 @@
 
 	if($action == "update"){
 		try{
-			$sql = "update FP.TERM set ACAD_YEAR = ?, START_DATE = ?, END_DATE = ?;
-			$query = $con->prepare($sql);
-			$query->execute(array(	$_POST['firstName_update'],
-							$_POST['acadYear_update'],
-							$_POST['startDate_update'],
-							$_POST['endDate_update']));
+			$sql = "update FP.TERM set ACAD_YEAR = ?, START_DATE = ?, END_DATE = ? where ID = ?";
+			$query = $con->prepare( $sql );
+			$query->execute(array( $_POST['acadYear_update'],
+						$_POST['startDate_update'],
+						$_POST['endDate_update'],
+						$_POST['record_id']));
 			echo "Record was updated.";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
@@ -26,7 +26,7 @@
 
 	try {
 		//prepare query
-		$sql = "select ACAD_YEAR, START_DATE, END_DATE from FP.TERM where ID =:ID";
+		$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from FP.TERM where ID =:ID";
 		$query = $con->prepare( $sql );
 		$query->bindParam ( ':ID', $_REQUEST['record_id'],PDO::PARAM_INT );  
 		$query->execute();

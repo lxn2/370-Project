@@ -5,11 +5,11 @@
 </head>
 <body>
 <script type='text/javascript'>
-function delete_record(id){
+function delete_record(id_student, id_class, id_alert_date){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'attendance.php?form_action=delete&record_id=' + id;
+		window.location = 'attendance.php?form_action=delete&record_id_student=' + id_student + '&record_id_class=' + id_class + '&record_id_alert_date=' + id_alert_date;
 	} 
 }
 </script>
@@ -22,9 +22,11 @@ function delete_record(id){
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from FP.ATTENDANCE where ID = ?";
+			$sql = "delete from FP.ATTENDANCE where STUDENT = ? and CLASS = ? and ATTENDANCE_DATE = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array( $_GET['record_id']));
+			$query->execute(array( 	$_GET['record_id_student'],
+							$_GET['record_id_class'],
+							$_GET['record_id_attendance_date']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
@@ -73,9 +75,9 @@ function delete_record(id){
 				<td>{$ATTENDANCE_STATUS}</td>
 				<td>{$COMMENT}</td>
 				<td>
-					<a href='attendance-update.php?record_id={$ID}'>Edit</a>
+					<a href='attendance-update.php?record_id_student={$STUDENT}&record_id_class={$CLASS}&record_id_attendance_date={$ATTENDANCE_DATE}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$STUDENT}, {$CLASS}, \"{$ATTENDANCE_DATE}\" );'>Delete</a>
 				</td>
 			</tr>
 			";

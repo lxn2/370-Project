@@ -15,7 +15,7 @@
 			$sql = "insert into FP.ATTENDANCE (STUDENT, CLASS, ATTENDANCE_DATE, ATTENDANCE_STATUS, COMMENT)
 			 	values (:STUDENT, :CLASS, :ATTENDANCE_DATE, :ATTENDANCE_STATUS, :COMMENT)";  
 			$query = $con->prepare($sql);  
-			$query->execute(array(	 	':STUDENT'=>$_POST['student_new'], 
+			$query->execute(array(	':STUDENT'=>$_POST['student_new'], 
 							':CLASS'=>$_POST['class_new'], 
 							':ATTENDANCE_DATE'=>$_POST['attendanceDate_new'],
 							':ATTENDANCE_STATUS'=>$_POST['attendanceStatus_new'],

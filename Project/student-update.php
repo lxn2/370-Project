@@ -13,7 +13,7 @@
 	if($action == "update"){
 		try{
 			$sql = "update FP.STUDENT set FNAME = ?, LNAME = ?, EMAIL = ?, PHONE_AC = ?, PHONE = ?, CURRENT_CLASS = ?, CASE_WORKER = ?  where ID = ?";
-			$query = $con->prepare($sql);
+			$query = $con->prepare( $sql );
 			$query->execute(array(	$_POST['firstName_update'],
 							$_POST['lastName_update'],
 							$_POST['email_update'],

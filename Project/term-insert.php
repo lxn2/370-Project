@@ -12,11 +12,10 @@
 
 	if($action=='create'){
  		try{  
-			$sql = "insert into PERSON (ACAD_YEAR,START_DATE,END_DATE)
+			$sql = "insert into FP.TERM (ACAD_YEAR,START_DATE,END_DATE)
 			 	values (:ACAD_YEAR,:START_DATE,:END_DATE)";  
 			$query = $con->prepare($sql);  
-			$query->execute(array(	 
-							':ACAD_YEAR'=>$_POST['acadYear_update'], 
+			$query->execute(array(	':ACAD_YEAR'=>$_POST['acadYear_update'], 
 							':START_DATE'=>$_POST['startDate_update'], 
 							':END_DATE'=>$_POST['endDate_update']));
 			echo "Record was saved.";

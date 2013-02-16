@@ -47,7 +47,7 @@
 				<td>Name</td>
 				<td><input type='text' name='name_update' value='<?php echo $name_current;  ?>' /></td>
 			</tr>
-            <tr>
+			<tr>
 				<td colspan="2" style="text-align: center;">
 					<!--so that we could identify what record is to be updated-->
 					<input type='hidden' name='record_id' value='<?php echo $id ?>' /> 

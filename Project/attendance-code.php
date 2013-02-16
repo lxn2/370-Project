@@ -40,7 +40,7 @@ function delete_record(id){
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='person-insert.php'>Create New Record</a>";
+	echo "<a href='attendance-code-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$classTag1 = "imagetable";
 	$classTag2 = "class=" . $classTag1;
@@ -52,6 +52,7 @@ function delete_record(id){
 				<th>ID</th>
 				<th>Name</th>
 				<th>Short Name</th>
+				<th>Action</th>
 			</tr>
 		";
  
@@ -67,7 +68,6 @@ function delete_record(id){
 				<td>{$ID}</td>
 				<td>{$NAME}</td>
 				<td>{$SHORT_NAME}</td>
-
 				<td>
 					<a href='attendance-code-update.php?record_id={$ID}'>Edit</a>
 					 / 

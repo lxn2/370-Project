@@ -31,9 +31,9 @@ function delete_record(id){
 		}
 	}
     
-    $query =$con->query("select count(*) as NUM_RECORDS from FP.GRADE");
-    $query = $query->fetch(PDO::FETCH_ASSOC);
-    $num = $query['NUM_RECORDS']
+    	$query =$con->query("select count(*) as NUM_RECORDS from FP.GRADE");
+    	$query = $query->fetch(PDO::FETCH_ASSOC);
+    	$num = $query['NUM_RECORDS'];
 	
 	//select all data
 	$sql = "select ID, NAME from FP.GRADE";

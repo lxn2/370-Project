@@ -30,10 +30,10 @@ function delete_record(id){
 			echo "Error: " . $exception->getMessage();
 		}
 	}
-    
-    $query =$con->query("select count(*) as NUM_RECORDS from FP.ROLE");
-    $query = $query->fetch(PDO::FETCH_ASSOC);
-    $num = $query['NUM_RECORDS']
+
+	$query =$con->query("select count(*) as NUM_RECORDS from FP.ROLE");
+	$query = $query->fetch(PDO::FETCH_ASSOC);
+	$num = $query['NUM_RECORDS'];
 	
 	//select all data
 	$sql = "select ID, NAME from FP.ROLE";
@@ -51,7 +51,7 @@ function delete_record(id){
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
-                <th>Action</th>
+				<th>Action</th>
 			</tr>
 		";
  

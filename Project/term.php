@@ -31,9 +31,9 @@ function delete_record(id){
 		}
 	}
     
-    $query =$con->query("select count(*) as NUM_RECORDS from FP.TERM");
-    $query = $query->fetch(PDO::FETCH_ASSOC);
-    $num = $query['NUM_RECORDS']
+    	$query =$con->query("select count(*) as NUM_RECORDS from FP.TERM");
+    	$query = $query->fetch(PDO::FETCH_ASSOC);
+    	$num = $query['NUM_RECORDS'];
 	
 	//select all data
 	$sql = "select ID, ACAD_YEAR, START_DATE, END_DATE from FP.TERM";
@@ -49,9 +49,11 @@ function delete_record(id){
  		echo "
 		<table $classTag2>
 			<tr>
+				<th>ID</th>
 				<th>Academic Year</th>
 				<th>Start Date</th>
 				<th>End Date</th>
+				<th>Action</th>
 			</tr>
 		";
  
@@ -71,7 +73,7 @@ function delete_record(id){
 				<td>
 					<a href='term-update.php?record_id={$ID}'>Edit</a>
 					 / 
-					<a href='#' onclick='delete_user( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
 				</td>
 			</tr>
 			";
