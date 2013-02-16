@@ -63,7 +63,7 @@ references FP.PERSON(ID)
 
 create table FP.STUDENT (
     ID              integer identity(1,1),
-	NAME			varchar(40) not null,
+	LNAME			varchar(40) not null,
 	FNAME			varchar(40) not null,
 	EMAIL			varchar(60) null,
 	PHONE_AC		char(3) null,
