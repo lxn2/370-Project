@@ -97,3 +97,21 @@ create table FP.GRADE (
 )
 go
 
+
+create trigger ATTENDANCE_UNEXCUSED_ALERT
+on ATTENDANCE 
+after insert as 
+if (select ATTENDANCE_STATUS from inserted) = (select ID from ATT_CODE where SHORT_NAME = 'UA')
+or (select ATTENDANCE_STATUS from inserted) = (select ID from ATT_CODE where SHORT_NAME = 'UT')
+	begin
+		insert into ALERT
+		     (STUDENT,
+			 CLASS,
+			ALERT_DATE,
+			 ATT_CODE_ID)
+			 SELECT ins.STUDENT, 
+			    ins.CLASS,
+			    ins.ATTENDANCE_DATE,
+				ins.ATTENDANCE_STATUS
+			   from inserted ins
+	end
