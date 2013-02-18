@@ -5,7 +5,13 @@
 </head>
 <body>
 <script type='text/javascript'>
-
+function delete_record(id_student, id_class, id_alert_date){
+	var answer = confirm('Are you sure?');
+	if(answer){ //if user clicked ok
+		//redirect to url with action as delete and id to the record to be deleted
+		window.location = 'alert.php?form_action=delete&record_id_student=' + id_student + '&record_id_class=' + id_class + '&record_id_alert_date=' + id_alert_date;
+	} 
+}
 </script>
 <?php
 	//include database connection
@@ -16,9 +22,11 @@
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from FP.ALERT where ID = ?";
+			$sql = "delete from FP.ALERT where STUDENT = ? and CLASS = ? and ALERT_DATE = ?";
 			$query = $con->prepare($sql);
-			$query->execute(array( $_GET['record_id']));
+			$query->execute(array( 	$_GET['record_id_student'],
+							$_GET['record_id_class'],
+							$_GET['record_id_alert_date']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
@@ -34,7 +42,6 @@
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='person-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$classTag1 = "imagetable";
 	$classTag2 = "class=" . $classTag1;
@@ -65,7 +72,7 @@
 				<td>{$ALERT_DATE}</td>
 				<td>{$ATT_CODE_ID}</td>
 				<td>
-					<a href='#' onclick='delete_record( {$ID} );'>Delete</a>
+					<a href='#' onclick='delete_record( {$STUDENT}, {$CLASS}, \"{$ALERT_DATE}\" );'>Delete</a>
 				</td>
 			</tr>
 			";

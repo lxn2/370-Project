@@ -1,15 +1,15 @@
 <html>
 <head>
- 	<title>Attendance Table</title>
+ 	<title>Log Table</title>
 	<link rel="stylesheet" type="text/css" href="db.css" />
 </head>
 <body>
 <script type='text/javascript'>
-function delete_record(id_student, id_class, id_attendance_date){
+function delete_record(id_student, id_class, id_log_date){
 	var answer = confirm('Are you sure?');
 	if(answer){ //if user clicked ok
 		//redirect to url with action as delete and id to the record to be deleted
-		window.location = 'attendance.php?form_action=delete&record_id_student=' + id_student + '&record_id_class=' + id_class + '&record_id_attendance_date=' + id_attendance_date;
+		window.location = 'log.php?form_action=delete&record_id_student=' + id_student + '&record_id_class=' + id_class + '&record_id_log_date=' + id_log_date;
 	} 
 }
 </script>
@@ -22,27 +22,26 @@ function delete_record(id_student, id_class, id_attendance_date){
 	//if the user clicked ok, run our delete query
 	if($action=='delete'){
 		try {
-			$sql = "delete from FP.ATTENDANCE where STUDENT = ? and CLASS = ? and ATTENDANCE_DATE = ?";
+			$sql = "delete from FP.LOG where STUDENT = ? and CLASS = ? and LOG_DATE = ?";
 			$query = $con->prepare($sql);
 			$query->execute(array( 	$_GET['record_id_student'],
 							$_GET['record_id_class'],
-							$_GET['record_id_attendance_date']));
+							$_GET['record_id_log_date']));
 			echo "<div>Record was deleted.</div>";
 		}catch(PDOException $exception){ //to handle error
 			echo "Error: " . $exception->getMessage();
 		}
 	}
 
-	$query =$con->query("select count(*) as NUM_RECORDS from FP.ATTENDANCE");
+	$query =$con->query("select count(*) as NUM_RECORDS from FP.LOG");
 	$query = $query->fetch(PDO::FETCH_ASSOC);
 	$num = $query['NUM_RECORDS'];
 	
 	//select all data
-	$sql = "select STUDENT, CLASS, ATTENDANCE_DATE, ATTENDANCE_STATUS, COMMENT from FP.ATTENDANCE";
+	$sql = "select STUDENT, CLASS, LOG_DATE, OLD_STATUS, NEW_STATUS, ID_OF_UPDATER from FP.LOG";
 	$query = $con->prepare( $sql );
 	$query->execute();
 
-	echo "<a href='attendance-insert.php'>Create New Record</a>";
 	//create style sheet string to use in <table> tag below
 	$classTag1 = "imagetable";
 	$classTag2 = "class=" . $classTag1;
@@ -53,9 +52,10 @@ function delete_record(id_student, id_class, id_attendance_date){
 			<tr>
 				<th>Student</th>
 				<th>Class</th>
-				<th>Attendance Date</th>
-				<th>Attendance Status</th>
-				<th>Comment</th>
+				<th>Log Date</th>
+				<th>Old Status</th>
+				<th>New Status</th>
+				<th>ID of Updater</th>
 				<th>Action</th>
 			</tr>
 		";
@@ -71,13 +71,12 @@ function delete_record(id_student, id_class, id_attendance_date){
 			<tr>
 				<td>{$STUDENT}</td>
 				<td>{$CLASS}</td>
-				<td>{$ATTENDANCE_DATE}</td>
-				<td>{$ATTENDANCE_STATUS}</td>
-				<td>{$COMMENT}</td>
+				<td>{$LOG_DATE}</td>
+				<td>{$OLD_STATUS}</td>
+				<td>{$NEW_STATUS}</td>
+				<td>{$ID_OF_UPDATER}</td>
 				<td>
-					<a href='attendance-update.php?record_id_student={$STUDENT}&record_id_class={$CLASS}&record_id_attendance_date={$ATTENDANCE_DATE}'>Edit</a>
-					 / 
-					<a href='#' onclick='delete_record( {$STUDENT}, {$CLASS}, \"{$ATTENDANCE_DATE}\" );'>Delete</a>
+					<a href='#' onclick='delete_record( {$STUDENT}, {$CLASS}, \"{$LOG_DATE}\" );'>Delete</a>
 				</td>
 			</tr>
 			";
