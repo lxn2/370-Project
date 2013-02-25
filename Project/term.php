@@ -85,5 +85,6 @@ function delete_record(id){
  		echo "No records found.";
 	}
 ?>
+<a href="index.html">Return to index</a>
 </body>
 </html>
